@@ -1,0 +1,53 @@
+WINDOWS RUN GUIDE: RESUME PARSER AI
+=====================================
+
+This guide provides the exact steps to get the software running on Windows.
+
+STEP 1: INSTALL TESSERACT OCR (REQUIRED FOR IMAGES)
+-------------------------------------------------
+1. Download the Tesseract installer from: 
+   https://github.com/UB-Mannheim/tesseract/wiki
+2. Run the .exe installer. 
+3. IMPORTANT: Note the installation path (usually 'C:\Program Files\Tesseract-OCR').
+4. Add Tesseract to System PATH:
+   - Search for "Edit the system environment variables" in the Start menu.
+   - Click "Environment Variables" -> Under "System variables", find "Path" -> Click "Edit".
+   - Click "New" and paste: C:\Program Files\Tesseract-OCR
+   - Click OK on all windows.
+   - Restart your terminal/IDE for this to take effect.
+
+STEP 2: SETUP PROJECT FOLDER
+---------------------------
+1. Open PowerShell and go to the project directory:
+   cd C:\Users\kanus\resume-parser
+
+2. Create a Virtual Environment:
+   python -m venv venv
+
+3. Activate the Virtual Environment:
+   .\venv\Scripts\activate
+
+STEP 3: INSTALL PYTHON LIBRARIES
+--------------------------------
+Run this command while the venv is active:
+pip install fastapi uvicorn pdfplumber python-docx pytesseract openai sqlalchemy
+
+STEP 4: SET OPENAI API KEY
+--------------------------
+In the same PowerShell window, run:
+$env:OPENAI_API_KEY="your_actual_openai_api_key_here"
+
+STEP 5: RUN THE SERVER
+----------------------
+Start the application:
+uvicorn src.main:app --reload
+
+STEP 6: USE THE SOFTWARE
+------------------------
+1. Open your web browser.
+2. Go to: http://127.0.0.1:8000/docs
+3. Click on "POST /upload" -> "Try it out".
+4. Upload a Resume file (.pdf, .docx, or .jpg).
+5. Click "Execute".
+
+The parsed data will be stored in the 'resume_parser.db' file in your project folder.

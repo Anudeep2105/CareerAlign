@@ -1,0 +1,42 @@
+STEP-BY-STEP GUIDE TO RUN RESUME PARSER AI
+===========================================
+
+1. SYSTEM PREREQUISITES
+-----------------------
+- Install Python 3.9+
+- Install Tesseract OCR:
+    * Windows: Download from UB-Mannheim GitHub. Add 'C:\Program Files\Tesseract-OCR' to System PATH.
+    * Linux: sudo apt install tesseract-ocr
+    * macOS: brew install tesseract
+
+2. PROJECT SETUP
+----------------
+- Navigate to folder:
+  cd resume-parser
+
+- Create and activate virtual environment:
+  python -m venv venv
+  .\venv\Scripts\activate  (Windows)
+  source venv/bin/activate (Linux/macOS)
+
+3. INSTALL DEPENDENCIES
+-----------------------
+Run the following command:
+pip install fastapi uvicorn pdfplumber python-docx pytesseract openai sqlalchemy
+
+4. CONFIGURE API KEY
+--------------------
+Set your OpenAI API key in the terminal:
+- Windows (PowerShell): $env:OPENAI_API_KEY="your_key_here"
+- Linux/macOS: export OPENAI_API_KEY="your_key_here"
+
+5. LAUNCH APPLICATION
+---------------------
+Run the server:
+uvicorn src.main:app --reload
+
+6. TESTING
+----------
+- Open browser: http://127.0.0.1:8000/docs
+- Use the POST /upload endpoint to upload a .pdf, .docx, or image file.
+- Check the 'resume_parser.db' file for extracted results.
